@@ -1,0 +1,1084 @@
+/* --- GLOBAL VARIABLES & RESET (Light Theme Default) --- */
+:root {
+    --bg-color: #f8f9fa;           /* Clean light background */
+    --card-bg: #ffffff;            /* White card background */
+    --text-color: #2d3748;         /* Dark charcoal text */
+    --text-secondary: #718096;     /* Muted slate for secondary text */
+    --primary-color: #3182ce;      /* Modern Blue */
+    --primary-hover: #2b6cb0;
+    --accent-color: #0bc5ea;       /* Cyan accent */
+    --border-color: #e2e8f0;       /* Light border */
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    
+    --radius-md: 12px;
+    --radius-lg: 24px;
+    
+    --container-max-width: 1200px; 
+    --carousel-max-width: 850px;   
+    --sidebar-width: 300px;        
+
+    /* Highlights & tag styling (vivid, slightly transparent) */
+    --title-highlight: rgba(99,102,241,0.12); /* indigo-ish */
+    --desc-highlight: rgba(16,185,129,0.10);  /* teal-ish */
+    --tag-bg: transparent;
+    --tag-border: rgba(0,0,0,0.08);
+    /* Carousel title specific variables */
+    --carousel-title-bg: rgba(99,102,241,0.18);
+    --carousel-title-color: var(--text-color);
+    /* Status banner colors */
+    --status-banner-bg: rgba(99,102,241,0.10); /* subtle indigo */
+    --status-banner-border: rgba(99,102,241,0.18);
+    --status-banner-text: var(--text-color);
+    /* Status label */
+    --status-label-bg: rgba(99,102,241,0.22);
+    --status-label-color: #ffffff;
+    /* Profile banner colors */
+    --profile-banner-bg: rgba(16,185,129,0.06); /* subtle teal */
+    --profile-banner-border: rgba(16,185,129,0.12);
+    --profile-label-bg: rgba(16,185,129,0.18);
+    --profile-label-color: #04281a;
+    /* Side card highlights */
+    --side-text-highlight: rgba(99,102,241,0.16); /* indigo translucent */
+    --side-text-color: var(--text-color);
+    --side-btn-bg: var(--primary-color);
+    --side-btn-color: #ffffff;
+}
+
+/* --- DARK THEME VARIABLES --- */
+body.dark-theme {
+    --bg-color: #171923;
+    --card-bg: #2d3748;
+    --text-color: #f7fafc;
+    --text-secondary: #a0aec0;
+    --border-color: #4a5568;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    /* Dark-mode friendly highlight overrides */
+    --title-highlight: rgba(99,102,241,0.18);
+    --desc-highlight: rgba(16,185,129,0.14);
+    --tag-bg: transparent;
+    --tag-border: rgba(255,255,255,0.06);
+    --carousel-title-bg: rgba(99,102,241,0.24);
+    --carousel-title-color: var(--text-color);
+    --status-banner-bg: rgba(99,102,241,0.16);
+    --status-banner-border: rgba(99,102,241,0.28);
+    --status-banner-text: var(--text-color);
+    --status-label-bg: rgba(99,102,241,0.34);
+    --status-label-color: #0f172a;
+    --profile-banner-bg: rgba(16,185,129,0.12);
+    --profile-banner-border: rgba(16,185,129,0.22);
+    --profile-label-bg: rgba(16,185,129,0.26);
+    --profile-label-color: #0f172a;
+    --side-text-highlight: rgba(99,102,241,0.26);
+    --side-btn-bg: var(--primary-color);
+    --side-btn-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.8; /* Improved readability */
+    -webkit-font-smoothing: antialiased; /* Smooth fonts on Mac/iOS */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- UTILITIES --- */
+.container {
+    width: 90%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.section-gap {
+    margin-bottom: 3rem; /* Decreased from 5rem */
+}
+
+/* --- NEW: SECTION SEPARATOR --- */
+.section-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-color), transparent);
+    margin: 4rem auto;
+    width: 80%;
+    opacity: 0.7;
+}
+
+/* --- TYPOGRAPHY IMPROVEMENTS --- */
+h1, h2, h3, h4 {
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+/* Main Centered Headings (e.g., "Latest 10 Projects", "Interests") */
+.section-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Lines on left and right of centered headings */
+.section-heading::before,
+.section-heading::after {
+    content: '';
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), transparent);
+}
+
+.section-heading::after {
+    background: linear-gradient(to left, var(--primary-color), transparent);
+}
+
+/* Decorative underline removed for cleaner look */
+
+/* Left Aligned Headings (inside cards/sections) */
+.section-heading-left {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
+    color: var(--text-color);
+    position: relative;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color); /* Vertical accent line */
+    line-height: 1;
+}
+
+/* Text Styling */
+p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    backdrop-filter: blur(10px); /* Modern glass effect if bg is transparent */
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 50%;
+    background: #ffffff; /* white circle behind the favicon */
+    padding: 4px; /* creates the circular ring effect */
+    box-shadow: 0 4px 10px rgba(16,24,40,0.08);
+    border: 1px solid rgba(0,0,0,0.06);
+}
+.logo-text { white-space: nowrap; }
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+.nav-item {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.nav-item:hover, .nav-item.active {
+    color: var(--primary-color);
+}
+
+/* --- CONTROLS --- */
+.navbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+.control-btn:hover {
+    color: var(--primary-color);
+}
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.separator {
+    color: var(--border-color);
+}
+
+/* =========================================
+   CAROUSEL + SIDE VIEW LAYOUT
+   ========================================= */
+.content-layout-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-medium);
+    background-color: var(--card-bg);
+    width: 100%; 
+    flex: 1;
+    border: 1px solid var(--border-color);
+}
+
+/* Fixed title placed on the top-left corner of the main swipe view */
+.carousel-title {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 15;
+    background: var(--carousel-title-bg);
+    color: var(--carousel-title-color);
+    padding: 0.35rem 0.7rem;
+    font-weight: 800;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    backdrop-filter: blur(6px);
+}
+
+.carousel-title .carousel-title-badge { display: none; }
+
+/* Collapse into a small circular badge on very small screens */
+@media (max-width: 480px) {
+    .carousel-title {
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        top: 10px;
+        left: 10px;
+        font-size: 0.9rem;
+    }
+    .carousel-title .carousel-title-full { display: none; }
+    .carousel-title .carousel-title-badge {
+        display: inline-block;
+        font-weight: 800;
+        color: var(--carousel-title-color);
+        background: transparent;
+    }
+    /* Make sure carousel controls don't overlap badge too much */
+    .carousel-container .carousel-btn { width: 40px; height: 40px; }
+}
+
+/* Accessible only helper for screen readers */
+.sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
+}
+
+.side-view-container {
+    display: none; 
+    flex-direction: column;
+    /* Adjusted to better distribute space if height is constrained */
+    justify-content: space-between; 
+    gap: 1rem;
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+}
+
+@media (min-width: 1150px) {
+    .carousel-container {
+        max-width: 1000px;
+        /* Increased minimum height for larger carousel */
+        min-height: 420px; 
+    }
+    .side-view-container {
+        display: flex;
+        /* Inherit the same minimum height for column alignment */
+        min-height: 420px;
+    }
+}
+
+/* Carousel Internals */
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother ease */
+}
+.carousel-slide {
+    min-width: 100%;
+    /* ADJUSTED: Reduced vertical padding from 4rem to 3.5rem to shrink the overall slide height */
+    padding: 3.5rem 3rem; 
+    box-sizing: border-box;
+    /* Ensure content centers vertically when height is constrained by min-height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    height: 100%;
+    position: relative;
+    background-attachment: local;
+}
+.carousel-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(248, 249, 250, 0.95) 0%, rgba(248, 249, 250, 0.7) 50%, rgba(248, 249, 250, 0) 100%);
+    z-index: 0;
+}
+body.dark-theme .carousel-slide::before {
+    background: linear-gradient(90deg, rgba(23, 25, 35, 0.95) 0%, rgba(23, 25, 35, 0.7) 50%, rgba(23, 25, 35, 0) 100%);
+}
+.project-card {
+    text-align: left;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.project-card.background-style {
+    padding: 2rem;
+}
+.project-image {
+    font-size: 5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+.project-image.large-background {
+    font-size: 8rem;
+    opacity: 0.15;
+    margin-bottom: 0;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+.project-info {
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+}
+.project-info.overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+}
+.project-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-color);
+    background-color: var(--title-highlight);
+    padding: 0.18rem 0.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.2s, color 0.2s;
+}
+.project-info p {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+.project-info p.small-text {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+    background-color: var(--desc-highlight);
+    padding: 0.2rem 0.45rem;
+    border-radius: 6px;
+    display: inline-block;
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
+}
+.tags {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem; /* Added margin for button separation */
+}
+.tags.small-tags {
+    margin-top: 0.4rem;
+    margin-bottom: 0.5rem;
+    gap: 0.3rem;
+}
+.tags span {
+    background-color: var(--tag-bg); /* transparent to reveal slide background */
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border: 1px solid var(--tag-border); /* subtle border instead of full card bg */
+    backdrop-filter: blur(4px);
+}
+.tags.small-tags span {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+}
+
+/* NEW: Primary Button Style for Carousel */
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(49, 130, 206, 0.4);
+    text-align: center;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(49, 130, 206, 0.6);
+}
+.btn-primary.small-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+    font-weight: 600;
+}
+
+/* NEW: Small Text Button for Side View Cards */
+.btn-text-sm {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+}
+.btn-text-sm:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+
+/* Buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--shadow-light);
+    color: var(--text-color);
+    font-size: 1rem;
+    z-index: 10;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.body.dark-theme .carousel-btn {
+    background-color: rgba(45, 55, 72, 0.9);
+}
+.carousel-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.indicator.active {
+    background-color: var(--primary-color);
+    width: 24px; /* Pill shape for active */
+    border-radius: 4px;
+}
+
+.slide-timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 0.75rem;
+    background: var(--bg-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    border: 1px solid var(--border-color);
+}
+
+/* Side View Cards */
+.small-view-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border-color);
+    cursor: pointer; /* Added clickable cursor */
+    position: relative; /* for overlay when using bg images */
+}
+.small-view-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+.small-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+/* When a side card uses the project background image */
+.small-view-card.bg-image {
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: white; /* ensure readable by default */
+}
+.small-view-card.bg-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.36));
+    z-index: 0;
+}
+.small-view-card.bg-image .small-icon,
+.small-view-card.bg-image .small-content { z-index: 1; }
+.small-view-card.bg-image .small-icon { background: rgba(255,255,255,0.08); }
+
+/* Hide the image icon in side cards (we use the background image instead) */
+.small-view-card .small-icon { display: none; }
+
+/* Highlight the side card title to improve legibility */
+.small-view-card .small-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+}
+
+.small-view-card .small-content h4 {
+    display: block;
+    background: var(--side-text-highlight);
+    color: var(--side-text-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 800;
+    margin: 0; 
+}
+
+/* Emphasize the View Details link as a pill CTA */
+.small-view-card .btn-text-sm {
+    display: inline-block;
+    background-color: var(--side-btn-bg);
+    color: var(--side-btn-color);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 6px 14px rgba(49,130,206,0.18);
+}
+.small-view-card .btn-text-sm:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Overrides for bg-image cards to ensure contrast */
+.small-view-card.bg-image .small-content h4 {
+    background: rgba(0,0,0,0.32);
+    color: #ffffff;
+}
+.small-view-card.bg-image .btn-text-sm {
+    background-color: rgba(255,255,255,0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.16);
+    box-shadow: none;
+}
+.small-content h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+.more-card {
+    border-style: dashed;
+    justify-content: center;
+    background: transparent;
+    cursor: default;
+}
+
+/* =========================================
+   PROFILE & STATUS SPLIT LAYOUT (Enhanced & Smaller)
+   ========================================= */
+.split-layout {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    /* Reduced max width slightly for a more contained feel */
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.split-box {
+    flex: 1; 
+    background-color: var(--card-bg);
+    /* REDUCED PADDING: From 2rem to 1.5rem for a smaller box */
+    padding: 1.5rem; 
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top accent for cards - now a solid, modern line */
+.split-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Slightly thinner */
+    background: var(--primary-color);
+}
+
+.btn-outline-sm {
+    display: inline-block;
+    padding: 0.5rem 1.5rem; /* Reduced padding on button */
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 50px; /* Pill button */
+    font-weight: 600;
+    font-size: 0.85rem; /* Smaller button font */
+    margin-top: 1rem; /* Reduced margin for separation */
+    align-self: flex-start;
+    transition: all 0.2s;
+}
+.btn-outline-sm:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Profile Content Text: Making P elements smaller */
+.profile-content p {
+    font-size: 0.95rem; /* Reduced paragraph font size */
+    line-height: 1.5; /* Tightened line height */
+    margin-bottom: 1rem;
+}
+
+/* Status Specifics */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: rgba(72, 187, 120, 0.06); /* Lighter background for small indicator */
+    padding: 0.45rem 0.7rem; /* tighter padding inside banner */
+    border-radius: 999px; /* pill */
+    margin: 0; /* handled by banner layout */
+    border: 1px solid rgba(72, 187, 120, 0.08);
+}
+.status-dot {
+    width: 8px; /* Slightly smaller dot */
+    height: 8px;
+    background-color: #48bb78; 
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.2);
+    animation: pulse 2s infinite;
+}
+.status-text {
+    font-weight: 700;
+    color: #2f855a;
+    text-transform: uppercase;
+    font-size: 0.75rem; /* Smaller font */
+    letter-spacing: 0.5px;
+}
+.status-details p {
+    margin-bottom: 0.5rem; /* Tighter spacing */
+    font-size: 0.9rem; /* Smaller font */
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.4rem; /* Reduced padding */
+    line-height: 1.3; /* Tightened line height */
+}
+.status-details p:last-child {
+    border-bottom: none;
+}
+.status-details strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(72, 187, 120, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0); }
+}
+
+/* --- STATUS BANNER (thin rectangle above carousel) --- */
+.status-banner-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 1rem; /* thin rectangle feel */
+    background: var(--status-banner-bg);
+    border: 1px solid var(--status-banner-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    color: var(--status-banner-text);
+}
+
+/* Small label that indicates the banner purpose */
+.status-label {
+    display: inline-block;
+    padding: 0.18rem 0.6rem;
+    border-radius: 999px;
+    background: var(--status-label-bg);
+    color: var(--status-label-color);
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+/* Make banner more compact on mobile */
+@media (max-width: 768px) {
+    .status-banner-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.45rem 0.8rem;
+        gap: 0.4rem;
+    }
+    .status-label { margin-bottom: 0.2rem; }
+    .status-details p { display: block; border-bottom: none; padding: 0; }
+}
+
+    /* --- PROFILE BANNER (thin rectangle similar to status) --- */
+    .profile-banner-inner {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.45rem 1rem;
+        background: var(--profile-banner-bg);
+        border: 1px solid var(--profile-banner-border);
+        border-radius: 12px;
+        box-shadow: var(--shadow-light);
+        color: var(--text-color);
+    }
+
+    .profile-label {
+        display: inline-block;
+        padding: 0.18rem 0.6rem;
+        border-radius: 999px;
+        background: var(--profile-label-bg);
+        color: var(--profile-label-color);
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+
+    .profile-snippet {
+        flex: 1;
+        margin: 0 1rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.4;
+        white-space: normal; /* allow wrapping and full text */
+        overflow: visible;
+        max-height: none;
+    }
+
+    @media (max-width: 768px) {
+        .profile-banner-inner { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+        .profile-snippet { white-space: normal; max-height: none; }
+    }
+
+    /* (No expand/collapse state required; banner shows full text by default) */
+
+/* --- CERTIFICATIONS SECTION --- */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+}
+
+.certification-card {
+    background-color: var(--card-bg);
+    padding: 0.8rem 0.6rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.certification-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+.cert-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.cert-header i {
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+.cert-header h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.cert-issuer {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.cert-date {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+/* --- TWO COLUMN LAYOUT FOR CERTIFICATIONS & INTERESTS --- */
+.certifications-interests-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.certifications-interests-wrapper > section {
+    margin-bottom: 0;
+}
+
+.certifications-interests-wrapper > section:first-child {
+    border-right: 2px solid var(--border-color);
+    padding-right: 3rem;
+}
+
+.certifications-interests-wrapper > section:last-child {
+    padding-left: 3rem;
+}
+
+@media (max-width: 968px) {
+    .certifications-interests-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .certifications-interests-wrapper > section:first-child {
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        padding-right: 0;
+        padding-bottom: 2rem;
+    }
+    
+    .certifications-interests-wrapper > section:last-child {
+        padding-left: 0;
+        padding-top: 2rem;
+    }
+}
+
+.btn-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-badge:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* --- INTERESTS & HOBBIES --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ultra small cards */
+    gap: 0.8rem;
+}
+.skill-card {
+    background-color: var(--card-bg);
+    padding: 0.8rem 0.6rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+.skill-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+.skill-card i {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.4rem;
+    background: var(--bg-color);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.skill-card h3 {
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+.skill-card p {
+    font-size: 0.7rem;
+    line-height: 1.1;
+}
+
+/* --- FOOTER --- */
+.footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 6rem;
+}
+.footer .social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.footer .social-links a {
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    transition: all 0.2s;
+}
+.footer .social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; 
+    }
+    .logo-img { width: 34px; height: 34px; }
+    .split-layout {
+        flex-direction: column;
+        max-width: 100%; /* Remove max-width on mobile */
+    }
+    .section-heading {
+        font-size: 1.8rem;
+    }
+    .section-gap {
+        margin-bottom: 3rem;
+    }
+}
